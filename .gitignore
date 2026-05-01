@@ -53,3 +53,15 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# project environment 
+.vscode/
+.idea/
+*.code-workspace
+.cache/
+.venv/
+venv/
+__pycache__/
+build/
+dist/
+*.egg-info/
