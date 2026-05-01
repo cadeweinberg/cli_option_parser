@@ -2,7 +2,12 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-project(cli_option_parser C)
+project(cli_option_parser
+  LANGUAGES C
+  VERSION 0.1.0
+  DESCRIPTION "A simple C library for parsing command-line options"
+  HOMEPAGE_URL "https://github.com/cade-weinberg/cli_option_parser"
+)
 
 set(COP_BASE_DIR    ${CMAKE_CURRENT_SOURCE_DIR})
 set(COP_INCLUDE_DIR ${COP_BASE_DIR}/include)
