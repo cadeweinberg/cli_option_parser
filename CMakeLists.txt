@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(cli_option_parser
   LANGUAGES C
-  VERSION 0.1.0
+  VERSION 0.1.1
   DESCRIPTION "A simple C library for parsing command-line options"
   HOMEPAGE_URL "https://github.com/cade-weinberg/cli_option_parser"
 )
@@ -31,7 +31,13 @@ target_include_directories(cli_option_parser
 )
 target_compile_options(cli_option_parser
   PRIVATE
-  $<$<C_COMPILER_ID:MSVC>:/W4 /WX>
+  # NOTE: cmocka (the testing library) has a few integer narrowing 
+  # warnings which the msvc compiler rightfully notifies us of.
+  # however it causes CI/CD to fail, and its an error in an upstream 
+  # dependency. Which may be fixed in a future release. Or we could 
+  # fix it ourselves. So, as a quick patch, we will turn off /WX
+  #$<$<C_COMPILER_ID:MSVC>:/W4 /WX>
+  $<$<C_COMPILER_ID:MSVC>:/W4>
     $<$<NOT:$<C_COMPILER_ID:MSVC>>:-Wall -Wextra -Werror>
 )
 
