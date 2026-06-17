@@ -5,6 +5,8 @@
 
 #include <stdint.h>
 
+#include "cli_option_parser_export.h"
+
 typedef enum CliOptionArgumentKind {
   OPTION_ARGUMENT_NONE,
   OPTION_ARGUMENT_REQUIRED,
@@ -37,9 +39,9 @@ typedef struct CliOptionResult {
   char const *argument;
 } CliOptionResult;
 
-void cli_option_parser_init(CliOptionParser *parser, CliOption const *options,
+CLI_OPTION_PARSER_EXPORT void cli_option_parser_init(CliOptionParser *parser, CliOption const *options,
                             int32_t option_count);
-CliOptionResult cli_option_parser_parse_option(CliOptionParser *parser,
+CLI_OPTION_PARSER_EXPORT CliOptionResult cli_option_parser_parse_option(CliOptionParser *parser,
                                                int32_t argc,
                                                char const *argv[]);
 /*

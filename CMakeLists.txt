@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.22)
 
 project(cli_option_parser
   LANGUAGES C
@@ -14,8 +14,10 @@ set(COP_INCLUDE_DIR ${COP_BASE_DIR}/include)
 set(COP_SOURCE_DIR  ${COP_BASE_DIR}/src)
 set(COP_TEST_DIR    ${COP_BASE_DIR}/test)
 set(COP_CMAKE_DIR   ${COP_BASE_DIR}/cmake)
+set(COP_BINARY_DIR  ${CMAKE_CURRENT_BINARY_DIR})
 
 include(CTest)
+include(GenerateExportHeader)
 include(${COP_CMAKE_DIR}/third-party.cmake)
 
 add_library(cli_option_parser)
@@ -24,6 +26,7 @@ target_sources(cli_option_parser
     ${COP_SOURCE_DIR}/cli_option_parser.c
   PUBLIC
     ${COP_INCLUDE_DIR}/cli_option_parser.h
+    ${COP_INCLUDE_DIR}/cli_option_parser_export.h
 )
 target_include_directories(cli_option_parser
   PUBLIC
@@ -39,6 +42,10 @@ target_compile_options(cli_option_parser
   #$<$<C_COMPILER_ID:MSVC>:/W4 /WX>
   $<$<C_COMPILER_ID:MSVC>:/W4>
     $<$<NOT:$<C_COMPILER_ID:MSVC>>:-Wall -Wextra -Werror>
+)
+generate_export_header(
+    cli_option_parser
+    EXPORT_FILE_NAME "../../include/cli_option_parser_export.h"
 )
 
 add_subdirectory(test)
